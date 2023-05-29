@@ -2,20 +2,24 @@ import CardItem from "@/components/CardItem";
 import Input from "@/components/Input";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 const AddSet = () => {
   const router = useRouter();
   const { setId } = router.query;
   const [cards, setCards] = useState([
     {
+      id: uuidv4(),
       term: "",
       definition: "",
     },
     {
+      id: uuidv4(),
       term: "",
       definition: "",
     },
   ]);
+  console.log(cards);
 
   return (
     <div className="py-6 w-3/4 mx-auto">
@@ -54,13 +58,22 @@ const AddSet = () => {
       </div>
 
       <div className=" flex flex-col mt-24 gap-5">
-        {cards.map((item, key) => {
-          return <CardItem key={key} item={item} index={key} />;
+        {cards?.map((item, key) => {
+          return (
+            <CardItem
+              key={key}
+              item={item}
+              index={key}
+              disable={cards.length < 3}
+              setCards={setCards}
+              cards={cards}
+            />
+          );
         })}
 
         <button
           onClick={() => {
-            setCards([...cards, { term: "", definition: "" }]);
+            setCards([...cards, { id: uuidv4(), term: "", definition: "" }]);
           }}
           className="
             flex
@@ -89,6 +102,20 @@ const AddSet = () => {
             + KART EKLE
           </div>
         </button>
+        <div className="flex flex-row w-full justify-end items-center ">
+          <button
+            className="
+            text-white
+            bg-blue-600
+            hover:bg-blue-900 
+            font-semibold
+            p-5 
+            rounded-md
+            transition"
+          >
+            Oluştur
+          </button>
+        </div>
       </div>
     </div>
   );

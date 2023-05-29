@@ -8,8 +8,7 @@ const Header = () => {
       <div className="flex flex-row items-center w-1/4">
         <button
           onClick={() => {
-            let param = Math.round(Math.random() * 10 ** 15);
-            router.push(`set/${param}`);
+            router.push(`set/create-set`);
           }}
           className="bg-sky-900 rounded-full w-10 h-10 text-4xl"
         >

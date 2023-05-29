@@ -3,9 +3,18 @@ interface InputProps {
   type?: string;
   placeholder?: string;
   name: string;
+  onChange?: (value: any) => void;
+  value?: string;
 }
 
-const Input: React.FC<InputProps> = ({ label, type, name, placeholder }) => {
+const Input: React.FC<InputProps> = ({
+  label,
+  type,
+  name,
+  placeholder,
+  onChange,
+  value,
+}) => {
   return (
     <div className="w-full">
       <input
@@ -28,6 +37,8 @@ const Input: React.FC<InputProps> = ({ label, type, name, placeholder }) => {
             "
         type={type}
         placeholder={placeholder}
+        onChange={onChange}
+        value={value}
       />
       <label htmlFor={name} className="text-neutral-300 font-semibold text-sm">
         {label}
