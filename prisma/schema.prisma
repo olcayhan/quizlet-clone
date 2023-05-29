@@ -15,4 +15,29 @@ model User {
   hashedPassword String?
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
+
+  sets Set[]
+}
+
+model Set {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  desc      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    String?  @db.ObjectId
+
+  user User? @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  cards Card[]
+}
+
+model Card {
+  id         String  @id @default(auto()) @map("_id") @db.ObjectId
+  cardId     String
+  term       String
+  definition String
+  setId      String? @db.ObjectId
+
+  Set Set? @relation(fields: [setId], references: [id], onDelete: Cascade)
 }

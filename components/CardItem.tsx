@@ -50,7 +50,7 @@ const CardItem: React.FC<CardItemProps> = ({
       <div className="flex flex-col sm:flex-row gap-5 px-4 pb-8 ">
         <Input
           label="TERİM"
-          name="terim"
+          name={`term${index}`}
           onChange={(e) => {
             let temp = [...cards];
             for (let i = 0; i < temp.length; i++) {
@@ -62,7 +62,7 @@ const CardItem: React.FC<CardItemProps> = ({
         />
         <Input
           label="TANIM"
-          name="tanım"
+          name={`def${index}`}
           onChange={(e) => {
             let temp = [...cards];
             for (let i = 0; i < temp.length; i++) {
