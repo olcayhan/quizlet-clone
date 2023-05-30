@@ -58,13 +58,17 @@ const AddSet = () => {
         <button
           onClick={handleClick}
           className="
-            text-white
-            bg-blue-600
-            hover:bg-blue-900 
-            font-semibold
-            p-2 
-            rounded-md
-            transition
+          text-white
+          bg-blue-600
+          border-[1px]
+          border-transparent
+          font-semibold
+          p-2 
+          rounded-md
+          hover:bg-blue-900 
+          focus:bg-blue-950
+          focus:border-gray-50
+          transition
         "
         >
           Oluştur
@@ -143,11 +147,16 @@ const AddSet = () => {
             className="
             text-white
             bg-blue-600
-            hover:bg-blue-900 
+            border-[1px]
+            border-transparent
             font-semibold
             p-5 
             rounded-md
-            transition"
+            hover:bg-blue-900 
+            focus:bg-blue-950
+            focus:border-gray-50
+            transition
+            "
           >
             Oluştur
           </button>

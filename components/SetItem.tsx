@@ -1,5 +1,6 @@
 import useCards from "@/hooks/useCards";
 import useCurrentUser from "@/hooks/useCurrentUser";
+import { useRouter } from "next/router";
 
 interface SetItemProps {
   name: string;
@@ -8,9 +9,13 @@ interface SetItemProps {
 const SetItem: React.FC<SetItemProps> = ({ name, setId }) => {
   const { data: currentUser } = useCurrentUser();
   const { data: cards } = useCards(setId);
+  const router = useRouter();
 
   return (
     <div
+      onClick={() => {
+        router.push(`/set/${setId}`);
+      }}
       className="
         flex 
         flex-col 

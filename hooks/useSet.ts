@@ -2,8 +2,8 @@ import useSWR from "swr";
 
 import fetcher from "@/libs/fetcher";
 
-const useCards = (setId: string) => {
-  const url = setId ? `/api/card/${setId}` : null;
+const useSet = (setId: string) => {
+  const url = setId ? `/api/set/${setId}` : null;
   const { data, error, isLoading, mutate } = useSWR(url, fetcher);
 
   return {
@@ -14,4 +14,4 @@ const useCards = (setId: string) => {
   };
 };
 
-export default useCards;
+export default useSet;
