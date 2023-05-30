@@ -19,7 +19,7 @@ const SetItem: React.FC<SetItemProps> = ({ name, setId }) => {
       className="
         flex 
         flex-col 
-        bg-slate-600 
+        bg-blue-950 
         col-span-1
         cursor-pointer
         transition

@@ -1,7 +1,5 @@
-import useCurrentUser from "@/hooks/useCurrentUser";
 import useSets from "@/hooks/useSets";
 import SetItem from "./SetItem";
-import { useEffect } from "react";
 
 const SetFeed = () => {
   const { data: sets = [] } = useSets();

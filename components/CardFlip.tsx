@@ -10,15 +10,22 @@ const CardFlip: React.FC<CardFlipProps> = ({ term, definition }) => {
 
   return (
     <div
-      onClick={(e) => {
-        isFront
-          ? (e.target.style.transform = "rotateX(180deg)")
-          : (e.target.style.transform = "rotateX(0deg)");
-
-        setFront(!isFront);
+      onClick={() => setFront(!isFront)}
+      className="
+          py-48 
+          rounded-lg 
+          bg-blue-950 
+          mt-5 
+          relative 
+          shadow-xl 
+          transition 
+          duration-300 
+          cursor-pointer
+        "
+      style={{
+        transformStyle: "preserve-3d",
+        transform: isFront ? "rotateX(180deg)" : "rotateX(0deg)",
       }}
-      className="py-48 rounded-lg bg-slate-600 mt-5 relative shadow-2xl transition"
-      style={{ transformStyle: "preserve-3d" }}
     >
       <div
         className="absolute  w-full h-full pointer-events-none inset-0"

@@ -1,8 +1,7 @@
 import Header from "@/components/Header";
 import SetFeed from "@/components/SetFeed";
-import useCurrentUser from "@/hooks/useCurrentUser";
 import { NextPageContext } from "next";
-import { getSession, signOut } from "next-auth/react";
+import { getSession } from "next-auth/react";
 
 export async function getServerSideProps(context: NextPageContext) {
   const session = await getSession(context);
@@ -28,7 +27,6 @@ export default function Home() {
     <div className="w-full h-full">
       <Header />
       <SetFeed />
-      {/* <button onClick={() => signOut()}>Çıkış Yap</button> */}
     </div>
   );
 }

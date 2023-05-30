@@ -66,8 +66,8 @@ const AddSet = () => {
           p-2 
           rounded-md
           hover:bg-blue-900 
-          focus:bg-blue-950
-          focus:border-gray-50
+          active:bg-blue-950
+          active:border-gray-50
           transition
         "
         >
@@ -153,8 +153,8 @@ const AddSet = () => {
             p-5 
             rounded-md
             hover:bg-blue-900 
-            focus:bg-blue-950
-            focus:border-gray-50
+            active:bg-blue-950
+            active:border-gray-50
             transition
             "
           >
