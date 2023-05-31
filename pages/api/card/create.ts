@@ -2,7 +2,6 @@ import { NextApiRequest, NextApiResponse } from "next";
 
 import prisma from "@/libs/prismadb";
 
-
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -17,6 +16,8 @@ export default async function handler(
       data: {
         cardId: card.id,
         term: card.term,
+        level: card.level,
+        starred: card.starred,
         definition: card.definition,
         setId: set.data.id,
       },

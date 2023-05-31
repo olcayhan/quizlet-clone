@@ -24,7 +24,7 @@ const CardFlip: React.FC<CardFlipProps> = ({ term, definition }) => {
         "
       style={{
         transformStyle: "preserve-3d",
-        transform: isFront ? "rotateX(180deg)" : "rotateX(0deg)",
+        transform: isFront ? "rotateX(0deg)" : "rotateX(180deg)",
       }}
     >
       <div

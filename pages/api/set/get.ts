@@ -18,6 +18,9 @@ export default async function handler(
       where: {
         userId: currentUser.id,
       },
+      orderBy: {
+        createdAt: "desc",
+      },
     });
     return res.status(200).json(sets);
   } catch (error) {

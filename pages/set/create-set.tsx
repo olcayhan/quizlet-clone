@@ -19,17 +19,20 @@ const AddSet = () => {
       id: uuidv4(),
       term: "",
       definition: "",
+      level: 0,
+      starred: false,
     },
     {
       id: uuidv4(),
       term: "",
       definition: "",
+      level: 0,
+      starred: false,
     },
   ]);
 
   const handleClick = useCallback(async () => {
     try {
-      console.log("Çalıştı");
       const set = await axios.post("/api/set/create", { info });
       cards.map(async (card) => {
         await axios.post("/api/card/create", { card, set });
@@ -112,7 +115,16 @@ const AddSet = () => {
 
         <button
           onClick={() => {
-            setCards([...cards, { id: uuidv4(), term: "", definition: "" }]);
+            setCards([
+              ...cards,
+              {
+                id: uuidv4(),
+                term: "",
+                definition: "",
+                level: 0,
+                starred: false,
+              },
+            ]);
           }}
           className="
             flex

@@ -33,11 +33,15 @@ model Set {
 }
 
 model Card {
-  id         String  @id @default(auto()) @map("_id") @db.ObjectId
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
   cardId     String
   term       String
   definition String
-  setId      String? @db.ObjectId
+  setId      String?  @db.ObjectId
+  starred    Boolean?
+  level      Int?
+  createdAt  DateTime? @default(now())
+  updatedAt  DateTime? @updatedAt
 
   Set Set? @relation(fields: [setId], references: [id], onDelete: Cascade)
 }

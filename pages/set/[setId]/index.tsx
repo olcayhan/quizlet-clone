@@ -24,8 +24,10 @@ const SetScreen = () => {
   const { data: currentUser } = useCurrentUser();
   const { data: set = {} } = useSet(setId as string);
   const { data: cards = [] } = useCards(setId as string);
+  let level1 = cards.filter((item: any) => item.level === 0);
+  let level2 = cards.filter((item: any) => item.level === 1);
+  let level3 = cards.filter((item: any) => item.level === 2);
   const [card, setCard] = useState(0);
-  console.log(set);
 
   return (
     <div className="container mx-auto px-4 sm:px-18 lg:px-48">
@@ -123,7 +125,10 @@ const SetScreen = () => {
           </div>
         </div>
         <div className="flex flex-row items-center gap-2">
-          <button className="border-[1px] p-3 rounded-full hover:bg-gray-600 active:bg-gray-700">
+          <button
+            onClick={() => router.push(`/set/${setId}/edit`)}
+            className="border-[1px] p-3 rounded-full hover:bg-gray-600 active:bg-gray-700"
+          >
             <BsPencil color="white" size={18} />
           </button>
           <button className="border-[1px] p-3 rounded-full hover:bg-gray-600 active:bg-gray-700">
@@ -132,12 +137,104 @@ const SetScreen = () => {
         </div>
       </div>
 
+      <p className="text-white">{set.desc}</p>
+
       <div className="py-5 flex flex-col items-center gap-3">
-        <p className="text-white font-bold text-lg py-9 w-full">
+        <p className="text-white font-bold text-xl py-3 w-full">
           Bu setteki terimler ({cards.length})
         </p>
         <div className="flex flex-col gap-3 w-full">
-          {cards.map((card: any, index: any) => (
+          {level1.length !== 0 && (
+            <div className="flex flex-row justify-between py-3">
+              <div className="flex flex-col gap-2">
+                <p className="text-blue-400 text-xl font-bold">
+                  Çalışılmamış ({level1.length})
+                </p>
+                <p className="text-white">Bu terimleri henüz çalışmadınız.</p>
+              </div>
+            </div>
+          )}
+          {level1.map((card: any, index: any) => (
+            <div
+              key={index}
+              className="
+                bg-blue-950
+                flex
+                flex-row
+                items-center
+                px-5
+                py-4
+                rounded-md
+                shadow-xl
+            "
+            >
+              <div className="flex flex-row w-3/4 gap-5 px-3">
+                <p className="text-gray-100 w-56 border-r-[2px] border-neutral-900">
+                  {card.term}
+                </p>
+                <p className="text-gray-100 w-56">{card.definition}</p>
+              </div>
+
+              <div className="flex flex-row items-center justify-end gap-3 sm:gap-6 w-1/4">
+                <AiFillStar color="white" size={24} />
+                <AiOutlineSound color="white" size={24} />
+                <BsPencil color="white" size={20} />
+              </div>
+            </div>
+          ))}
+          {level2.length !== 0 && (
+            <div className="flex flex-row justify-between py-3">
+              <div className="flex flex-col gap-2">
+                <p className="text-orange-400 text-xl font-bold">
+                  Öğrenmeye devam edilen setler ({level2.length})
+                </p>
+                <p className="text-white">
+                  Bu terimleri öğrenmeye başladınız. Devam et!
+                </p>
+              </div>
+            </div>
+          )}
+          {level2.map((card: any, index: any) => (
+            <div
+              key={index}
+              className="
+                bg-blue-950
+                flex
+                flex-row
+                items-center
+                px-5
+                py-4
+                rounded-md
+                shadow-xl
+            "
+            >
+              <div className="flex flex-row w-3/4 gap-5 px-3">
+                <p className="text-gray-100 w-56 border-r-[2px] border-neutral-900">
+                  {card.term}
+                </p>
+                <p className="text-gray-100 w-56">{card.definition}</p>
+              </div>
+
+              <div className="flex flex-row items-center justify-end gap-3 sm:gap-6 w-1/4">
+                <AiFillStar color="white" size={24} />
+                <AiOutlineSound color="white" size={24} />
+                <BsPencil color="white" size={20} />
+              </div>
+            </div>
+          ))}
+          {level3.length !== 0 && (
+            <div className="flex flex-row justify-between py-3">
+              <div className="flex flex-col gap-2">
+                <p className="text-teal-300 text-xl font-bold">
+                  Tam öğrenilen ({level3.length})
+                </p>
+                <p className="text-white">
+                  Bu terimleri doğru şekilde öğreniyorsunuz.
+                </p>
+              </div>
+            </div>
+          )}
+          {level3.map((card: any, index: any) => (
             <div
               key={index}
               className="
@@ -168,6 +265,7 @@ const SetScreen = () => {
         </div>
 
         <button
+          onClick={() => router.push(`/set/${setId}/edit`)}
           className="
             mt-5
             px-8
