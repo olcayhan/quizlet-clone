@@ -17,6 +17,7 @@ import { FaChevronLeft, FaBrain, FaTrash } from "react-icons/fa";
 import { TbCards } from "react-icons/tb";
 import { HiOutlineDocument } from "react-icons/hi";
 import useCurrentUser from "@/hooks/useCurrentUser";
+import axios from "axios";
 
 const SetScreen = () => {
   const router = useRouter();
@@ -131,7 +132,13 @@ const SetScreen = () => {
           >
             <BsPencil color="white" size={18} />
           </button>
-          <button className="border-[1px] p-3 rounded-full hover:bg-gray-600 active:bg-gray-700">
+          <button
+            onClick={async () => {
+              await axios.post("/api/set/delete", { setId });
+              router.back();
+            }}
+            className="border-[1px] p-3 rounded-full hover:bg-gray-600 active:bg-gray-700"
+          >
             <FaTrash color="white" size={18} />
           </button>
         </div>

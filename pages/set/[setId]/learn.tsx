@@ -63,7 +63,7 @@ const Learn = () => {
     return <div className="text-white text-4xl"></div>;
   }
 
-  if (questions.length === 0) {
+  if (questions?.length === 0) {
     return <div>Bitti</div>;
   }
   return (
