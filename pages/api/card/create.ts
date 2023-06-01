@@ -12,6 +12,7 @@ export default async function handler(
 
   try {
     const { card, set } = req.body;
+    console.log(card);
     const item = await prisma.card.create({
       data: {
         cardId: card.id,

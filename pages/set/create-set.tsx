@@ -34,6 +34,7 @@ const AddSet = () => {
   const handleClick = useCallback(async () => {
     try {
       const set = await axios.post("/api/set/create", { info });
+
       cards.map(async (card) => {
         await axios.post("/api/card/create", { card, set });
       });

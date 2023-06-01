@@ -15,6 +15,12 @@ export default async function handler(
     const { info } = req.body;
     console.log(info);
 
+    await prisma.card.deleteMany({
+      where: {
+        setId: info.id,
+      },
+    });
+
     const set = await prisma.set.update({
       where: {
         id: info.id,

@@ -26,10 +26,9 @@ const AddSet = () => {
 
   const handleClick = useCallback(async () => {
     try {
-      console.log(cards);
       const set = await axios.post("/api/set/update", { info });
-      console.log(set);
       cards.map(async (card) => {
+        console.log(card)
         await axios.post("/api/card/update", { card, set });
       });
 
@@ -37,7 +36,7 @@ const AddSet = () => {
     } catch (err) {
       console.log(err);
     }
-  }, [info, cards]);
+  }, [info, cards, router]);
 
   return (
     <div className="py-6 w-3/4 mx-auto px-3">

@@ -13,12 +13,6 @@ export default async function handler(
   try {
     const { card, set } = req.body;
 
-    const deleted = await prisma.card.deleteMany({
-      where: {
-        setId: set.data.id,
-      },
-    });
-
     if (card.setId !== undefined) {
       const item = await prisma.card.create({
         data: {

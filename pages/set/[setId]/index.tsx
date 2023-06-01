@@ -3,7 +3,8 @@ import useCards from "@/hooks/useCards";
 import useSet from "@/hooks/useSet";
 import Button from "@/components/Button";
 
-import { useState } from "react";
+import { Oval } from "react-loader-spinner";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import {
   AiFillStar,
@@ -18,17 +19,45 @@ import { TbCards } from "react-icons/tb";
 import { HiOutlineDocument } from "react-icons/hi";
 import useCurrentUser from "@/hooks/useCurrentUser";
 import axios from "axios";
+import Flashcards from "./flashcards";
 
 const SetScreen = () => {
   const router = useRouter();
   const { setId } = router.query;
   const { data: currentUser } = useCurrentUser();
   const { data: set = {} } = useSet(setId as string);
-  const { data: cards = [] } = useCards(setId as string);
+  const { data: cards = [], isLoading } = useCards(setId as string);
+
   let level1 = cards.filter((item: any) => item.level === 0);
   let level2 = cards.filter((item: any) => item.level === 1);
   let level3 = cards.filter((item: any) => item.level === 2);
   const [card, setCard] = useState(0);
+
+  useEffect(() => {
+    try {
+    } catch (err) {
+    } finally {
+    }
+  }, []);
+
+  if (isLoading) {
+    return (
+      <div className="flex flex-col h-screen w-full items-center justify-center">
+        <Oval
+          height={80}
+          width={80}
+          color="white"
+          wrapperStyle={{}}
+          wrapperClass=""
+          visible={true}
+          ariaLabel="oval-loading"
+          secondaryColor="blue"
+          strokeWidth={2}
+          strokeWidthSecondary={2}
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="container mx-auto px-4 sm:px-18 lg:px-48">
@@ -44,58 +73,7 @@ const SetScreen = () => {
         <p className="text-white font-bold text-3xl">{set.name}</p>
       </div>
 
-      <div className="flex flex-col gap-2" style={{ perspective: "1000px" }}>
-        <CardFlip
-          term={cards[card]?.term}
-          definition={cards[card]?.definition}
-        />
-
-        {/* Buttons */}
-        <div className="flex flex-row gap-3 items-center justify-center py-3">
-          <button
-            disabled={card === 0}
-            onClick={() => setCard(card - 1)}
-            className="
-            p-2 
-            border-neutral-50 
-            border-[1px] 
-            rounded-full 
-            cursor-pointer 
-            shadow-xl
-            hover:bg-gray-600
-            active:bg-gray-800
-            disabled:opacity-40
-            disabled:cursor-default
-            disabled:bg-transparent
-            "
-          >
-            <AiOutlineArrowLeft size={30} color="white" />
-          </button>
-
-          <p className="text-white font-semibold px-2">
-            {card + 1} / {cards.length}
-          </p>
-          <button
-            disabled={card === cards.length - 1}
-            onClick={() => setCard(card + 1)}
-            className="
-            p-2 
-            border-neutral-50 
-            border-[1px] 
-            rounded-full 
-            cursor-pointer 
-            shadow-xl
-            hover:bg-gray-600
-            active:bg-gray-800
-            disabled:opacity-40
-            disabled:cursor-default
-            disabled:bg-transparent
-            "
-          >
-            <AiOutlineArrowRight size={30} color="white" />
-          </button>
-        </div>
-      </div>
+      <Flashcards onPage={true} />
 
       {/* Buttons */}
       <div className="flex flex-col justify-center py-3">
@@ -103,7 +81,11 @@ const SetScreen = () => {
           Tek başına çalışma aktivitesi
         </p>
         <div className="grid grid-cols-2 2xl:grid-cols-4 py-3 gap-3">
-          <Button Icon={TbCards} text="Kartlar" />
+          <Button
+            Icon={TbCards}
+            text="Kartlar"
+            onClick={() => router.push(`/set/${setId}/flashcards`)}
+          />
           <Button
             Icon={FaBrain}
             text="Öğren"
@@ -161,9 +143,9 @@ const SetScreen = () => {
               </div>
             </div>
           )}
-          {level1.map((card: any, index: any) => (
+          {level1.map((card: any, key: any) => (
             <div
-              key={index}
+              key={key}
               className="
                 bg-blue-950
                 flex
