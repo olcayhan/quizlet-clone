@@ -2,6 +2,8 @@ import { signOut } from "next-auth/react";
 import { useRouter } from "next/router";
 import { AiOutlinePlus } from "react-icons/ai";
 import { BiLogOut } from "react-icons/bi";
+import { toast } from "react-hot-toast";
+
 const Header = () => {
   const router = useRouter();
   return (
@@ -29,7 +31,10 @@ const Header = () => {
 
         <button
           className="bg-sky-900 rounded-full p-2 hover:bg-sky-950"
-          onClick={() => signOut()}
+          onClick={() => {
+            toast.success("Çıkış başarılı");
+            signOut();
+          }}
         >
           <BiLogOut size={24} color="white" />
         </button>

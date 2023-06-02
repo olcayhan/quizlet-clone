@@ -1,56 +1,77 @@
 import CardItem from "@/components/CardItem";
 import Input from "@/components/Input";
 import axios from "axios";
+import useSet from "@/hooks/useSet";
+import useCards from "@/hooks/useCards";
+import Spinner from "@/components/Spinner";
 
 import { FaChevronLeft } from "react-icons/fa";
 import { useRouter } from "next/router";
 import { useState, useCallback, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
-
-import useSet from "@/hooks/useSet";
-import useCards from "@/hooks/useCards";
+import { toast } from "react-hot-toast";
 
 const AddSet = () => {
   const router = useRouter();
   const { setId } = router.query;
-  const { data: set } = useSet(setId as string);
-  const { data: allCards } = useCards(setId as string);
+  const { data: set, isLoading: setLoading } = useSet(setId as string);
+  const { data: allCards, isLoading: cardLoading } = useCards(setId as string);
 
-  const [info, setInfo] = useState({});
-  const [cards, setCards] = useState([]);
+  const [info, setInfo] = useState({
+    name: "",
+    desc: "",
+  });
+  const [cards, setCards] = useState([
+    {
+      id: uuidv4(),
+      term: "",
+      definition: "",
+      level: 0,
+      starred: false,
+    },
+  ]);
 
   useEffect(() => {
     setInfo(set);
     setCards(allCards);
   }, [set, allCards]);
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleClick = useCallback(async () => {
     try {
+      setIsLoading(true);
       const set = await axios.post("/api/set/update", { info });
       cards.map(async (card) => {
-        console.log(card)
         await axios.post("/api/card/update", { card, set });
       });
-
-      router.back();
-    } catch (err) {
-      console.log(err);
+      toast.success("Başarıyla kaydedildi");
+    } catch (err: any) {
+      toast.error(err);
+    } finally {
+      setIsLoading(false);
     }
-  }, [info, cards, router]);
+  }, [info, cards, router, isLoading]);
+
+  if (cardLoading || setLoading) {
+    return <Spinner />;
+  }
 
   return (
     <div className="py-6 w-3/4 mx-auto px-3">
       <div className="flex flex-row items-center justify-between gap-4">
-        <div
+        <button
+          disabled={isLoading}
           className="bg-neutral-100 rounded-full p-3 cursor-pointer"
           onClick={() => {
             router.back();
           }}
         >
           <FaChevronLeft size={20} />
-        </div>
+        </button>
 
         <button
+          disabled={isLoading}
           onClick={handleClick}
           className="
           text-white
@@ -66,7 +87,7 @@ const AddSet = () => {
           transition
         "
         >
-          Bitti
+          {isLoading ? "Kaydediliyor..." : "Bitti"}
         </button>
       </div>
 
@@ -94,7 +115,7 @@ const AddSet = () => {
       </div>
 
       <div className=" flex flex-col mt-24 gap-5">
-        {cards?.map((item, key) => {
+        {cards?.map((item: any, key) => {
           return (
             <CardItem
               key={key}
@@ -149,6 +170,7 @@ const AddSet = () => {
         </button>
         <div className="flex flex-row w-full justify-end items-center ">
           <button
+            disabled={isLoading}
             onClick={handleClick}
             className="
             text-white
@@ -164,7 +186,7 @@ const AddSet = () => {
             transition
             "
           >
-            Bitti
+            {isLoading ? "Kaydediliyor..." : "Bitti"}
           </button>
         </div>
       </div>

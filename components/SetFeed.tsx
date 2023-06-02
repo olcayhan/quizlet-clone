@@ -1,8 +1,13 @@
 import useSets from "@/hooks/useSets";
 import SetItem from "./SetItem";
+import Spinner from "./Spinner";
 
 const SetFeed = () => {
-  const { data: sets = [] } = useSets();
+  const { data: sets = [], isLoading } = useSets();
+
+  if (isLoading) {
+    return <Spinner />;
+  }
   return (
     <div className="container mx-auto px-2">
       <p className="text-white font-bold mt-20 mb-2">En son </p>

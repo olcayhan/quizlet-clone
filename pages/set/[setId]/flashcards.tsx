@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 import { FaChevronLeft } from "react-icons/fa";
+import Spinner from "@/components/Spinner";
 
 interface FlashcardsProps {
   onPage?: boolean;
@@ -16,8 +17,23 @@ const Flashcards: React.FC<FlashcardsProps> = ({ onPage }) => {
   const { data: cards = [], isLoading } = useCards(setId as string);
   const [card, setCard] = useState(0);
 
+  if (isLoading) {
+    return <Spinner />;
+  }
+
   return (
-    <div className="flex flex-col gap-2" style={{ perspective: "1000px" }}>
+    <div
+      className={`
+        flex
+        flex-col
+        gap-2
+        ${!onPage && "py-6"} 
+        ${!onPage && "px-3"} 
+        ${!onPage && "w-3/4"} 
+        ${!onPage && "mx-auto"} 
+        `}
+      style={{ perspective: "1000px" }}
+    >
       {!onPage && (
         <div className="flex flex-row items-center gap-5 mt-12">
           <div

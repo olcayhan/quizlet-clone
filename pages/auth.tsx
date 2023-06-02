@@ -1,6 +1,8 @@
 import axios from "axios";
+
 import { signIn } from "next-auth/react";
 import { useCallback, useState } from "react";
+import { toast } from "react-hot-toast";
 
 const Auth = () => {
   const [isLogin, setLogin] = useState(true);
@@ -16,8 +18,10 @@ const Auth = () => {
         password,
         callbackUrl: "/",
       });
+
+      toast.success("Giriş başarılı");
     } catch (error) {
-      console.log(error);
+      toast.error("Birşeyler yanlış gitti");
     }
   }, [email, password]);
 
@@ -28,7 +32,7 @@ const Auth = () => {
         username,
         password,
       });
-
+      toast.success("Kayıt başarılı");
       login();
     } catch (error) {
       console.log(error);

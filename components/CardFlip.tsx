@@ -12,7 +12,7 @@ const CardFlip: React.FC<CardFlipProps> = ({ term, definition }) => {
     <div
       onClick={() => setFront(!isFront)}
       className="
-          py-48 
+          py-72 
           rounded-lg 
           bg-blue-950 
           mt-5 

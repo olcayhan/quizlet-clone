@@ -1,62 +1,50 @@
-import CardFlip from "@/components/CardFlip";
 import useCards from "@/hooks/useCards";
 import useSet from "@/hooks/useSet";
 import Button from "@/components/Button";
+import useCurrentUser from "@/hooks/useCurrentUser";
+import axios from "axios";
+import Flashcards from "./flashcards";
+import Spinner from "@/components/Spinner";
 
-import { Oval } from "react-loader-spinner";
-import { useState, useEffect } from "react";
+import { toast } from "react-hot-toast";
+import { useCallback } from "react";
 import { useRouter } from "next/router";
 import {
   AiFillStar,
   AiOutlineSound,
-  AiOutlineArrowLeft,
-  AiOutlineArrowRight,
   AiOutlineMergeCells,
 } from "react-icons/ai";
 import { BsPencil } from "react-icons/bs";
 import { FaChevronLeft, FaBrain, FaTrash } from "react-icons/fa";
 import { TbCards } from "react-icons/tb";
 import { HiOutlineDocument } from "react-icons/hi";
-import useCurrentUser from "@/hooks/useCurrentUser";
-import axios from "axios";
-import Flashcards from "./flashcards";
 
 const SetScreen = () => {
   const router = useRouter();
   const { setId } = router.query;
   const { data: currentUser } = useCurrentUser();
-  const { data: set = {} } = useSet(setId as string);
-  const { data: cards = [], isLoading } = useCards(setId as string);
+  const { data: set = {}, isLoading: setLoading } = useSet(setId as string);
+  const { data: cards = [], isLoading: cardLoading } = useCards(
+    setId as string
+  );
 
   let level1 = cards.filter((item: any) => item.level === 0);
   let level2 = cards.filter((item: any) => item.level === 1);
   let level3 = cards.filter((item: any) => item.level === 2);
-  const [card, setCard] = useState(0);
 
-  useEffect(() => {
+  const handleDelete = useCallback(async () => {
     try {
+      await axios.post("/api/set/delete", { setId });
+      toast.success("Set silindi");
     } catch (err) {
+      toast.error("Birşeyler yanlış gitti");
     } finally {
+      router.back();
     }
-  }, []);
+  }, [setId]);
 
-  if (isLoading) {
-    return (
-      <div className="flex flex-col h-screen w-full items-center justify-center">
-        <Oval
-          height={80}
-          width={80}
-          color="white"
-          wrapperStyle={{}}
-          wrapperClass=""
-          visible={true}
-          ariaLabel="oval-loading"
-          secondaryColor="blue"
-          strokeWidth={2}
-          strokeWidthSecondary={2}
-        />
-      </div>
-    );
+  if (setLoading || cardLoading) {
+    return <Spinner />;
   }
 
   return (
@@ -115,10 +103,7 @@ const SetScreen = () => {
             <BsPencil color="white" size={18} />
           </button>
           <button
-            onClick={async () => {
-              await axios.post("/api/set/delete", { setId });
-              router.back();
-            }}
+            onClick={handleDelete}
             className="border-[1px] p-3 rounded-full hover:bg-gray-600 active:bg-gray-700"
           >
             <FaTrash color="white" size={18} />

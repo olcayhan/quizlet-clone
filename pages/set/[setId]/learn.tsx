@@ -1,15 +1,16 @@
 import ButtonLearn from "@/components/ButtonLearn";
-
+import axios from "axios";
 import useCards from "@/hooks/useCards";
+
 import { useRouter } from "next/router";
 import { AiOutlineClose } from "react-icons/ai";
 import { useState, useCallback, useEffect } from "react";
-import axios from "axios";
 
 const Learn = () => {
   const router = useRouter();
   const { setId } = router.query;
   const { data: cards, isLoading } = useCards(setId as string);
+
   const [card, setCard] = useState(0);
   const [isClicked, setClicked] = useState(false);
   const [correctStatus, setCorrectStatus] = useState(0);

@@ -1,5 +1,6 @@
 import { BsTrash } from "react-icons/bs";
-import { useState, useCallback, useEffect } from "react";
+import { useCallback } from "react";
+
 import Input from "./Input";
 
 interface CardItemProps {
@@ -19,7 +20,7 @@ const CardItem: React.FC<CardItemProps> = ({
 }) => {
   const handleDelete = useCallback(() => {
     if (disable) return;
-    let temp = cards.filter((c: any) => c.id !== item.id);
+    let temp = cards.filter((card: any) => card.id !== item.id);
     setCards(temp);
   }, [cards]);
 

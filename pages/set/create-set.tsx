@@ -2,6 +2,7 @@ import CardItem from "@/components/CardItem";
 import Input from "@/components/Input";
 import axios from "axios";
 
+import { toast } from "react-hot-toast";
 import { FaChevronLeft } from "react-icons/fa";
 import { useRouter } from "next/router";
 import { useState, useCallback } from "react";
@@ -30,36 +31,41 @@ const AddSet = () => {
       starred: false,
     },
   ]);
+  const [isLoading, setLoading] = useState(false);
 
   const handleClick = useCallback(async () => {
     try {
+      setLoading(true);
       const set = await axios.post("/api/set/create", { info });
 
       cards.map(async (card) => {
         await axios.post("/api/card/create", { card, set });
       });
-
-      router.push("/");
+      toast.success("Set oluşturuldu");
     } catch (err) {
-      console.log(err);
+      toast.error("Birşeyler yanlış gitti");
+    } finally {
+      router.push("/");
     }
   }, [info, cards]);
 
   return (
     <div className="py-6 w-3/4 mx-auto px-3">
       <div className="flex flex-row items-center justify-between gap-4">
-        <div
+        <button
+          disabled={isLoading}
           className="bg-neutral-100 rounded-full p-3 cursor-pointer"
           onClick={() => {
             router.back();
           }}
         >
           <FaChevronLeft size={20} />
-        </div>
+        </button>
         <p className="text-white text-lg md:text-3xl font-bold">
           Yeni Çalışma seti Oluştur
         </p>
         <button
+          disabled={isLoading}
           onClick={handleClick}
           className="
           text-white
@@ -75,7 +81,7 @@ const AddSet = () => {
           transition
         "
         >
-          Oluştur
+          {isLoading ? "Oluşturuluyor..." : "Oluştur"}
         </button>
       </div>
 
@@ -101,7 +107,7 @@ const AddSet = () => {
       </div>
 
       <div className=" flex flex-col mt-24 gap-5">
-        {cards?.map((item, key) => {
+        {cards?.map((item: any, key) => {
           return (
             <CardItem
               key={key}
@@ -115,6 +121,7 @@ const AddSet = () => {
         })}
 
         <button
+          disabled={isLoading}
           onClick={() => {
             setCards([
               ...cards,
@@ -171,7 +178,7 @@ const AddSet = () => {
             transition
             "
           >
-            Oluştur
+            {isLoading ? "Oluşturuluyor..." : "Oluştur"}
           </button>
         </div>
       </div>
