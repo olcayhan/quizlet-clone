@@ -70,17 +70,17 @@ const SetScreen = () => {
         </p>
         <div className="grid grid-cols-2 2xl:grid-cols-4 py-3 gap-3">
           <Button
-            Icon={TbCards}
+            icon={TbCards}
             text="Kartlar"
             onClick={() => router.push(`/set/${setId}/flashcards`)}
           />
           <Button
-            Icon={FaBrain}
+            icon={FaBrain}
             text="Öğren"
             onClick={() => router.push(`/set/${setId}/learn`)}
           />
-          <Button Icon={HiOutlineDocument} text="Test" />
-          <Button Icon={AiOutlineMergeCells} text="Eşleştir" />
+          <Button icon={HiOutlineDocument} text="Test" />
+          <Button icon={AiOutlineMergeCells} text="Eşleştir" />
         </div>
       </div>
 

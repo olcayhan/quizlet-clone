@@ -1,12 +1,12 @@
 import {  IconType } from "react-icons/lib";
 
 interface ButtonProps {
-  Icon?: IconType;
+  icon?: IconType;
   text?: string;
   onClick?: () => void;
 }
 
-const Button: React.FC<ButtonProps> = ({ Icon, text, onClick }) => {
+const Button: React.FC<ButtonProps> = ({ icon:Icon, text, onClick }) => {
   return (
     <button
       onClick={onClick}
@@ -27,7 +27,7 @@ const Button: React.FC<ButtonProps> = ({ Icon, text, onClick }) => {
             transition
             "
     >
-      <Icon color="white" size={24} />
+      {Icon && <Icon color="white" size={24} />}
       <p className="text-white font-bold">{text}</p>
     </button>
   );
