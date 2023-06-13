@@ -47,7 +47,7 @@ const AddSet = () => {
     } finally {
       router.push("/");
     }
-  }, [info, cards]);
+  }, [info, cards, router]);
 
   return (
     <div className="py-6 w-3/4 mx-auto px-3">

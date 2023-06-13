@@ -41,7 +41,7 @@ const SetScreen = () => {
     } finally {
       router.back();
     }
-  }, [setId]);
+  }, [setId, router]);
 
   if (setLoading || cardLoading) {
     return <Spinner />;

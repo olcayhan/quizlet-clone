@@ -20,9 +20,9 @@ const CardItem: React.FC<CardItemProps> = ({
 }) => {
   const handleDelete = useCallback(() => {
     if (disable) return;
-    let temp = cards.filter((card: any) => card.id !== item.id);
+    let temp = cards.filter((card: any) => card.id !== item?.id);
     setCards(temp);
-  }, [cards]);
+  }, [cards, disable, item?.id]);
 
   return (
     <div className="bg-gray-800 rounded-xl">

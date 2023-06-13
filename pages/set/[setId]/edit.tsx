@@ -51,7 +51,7 @@ const AddSet = () => {
     } finally {
       setIsLoading(false);
     }
-  }, [info, cards, router, isLoading]);
+  }, [info, cards ]);
 
   if (cardLoading || setLoading) {
     return <Spinner />;

@@ -58,7 +58,7 @@ const Learn = () => {
     setClicked(false);
     setCorrectStatus(0);
     setChosen("");
-  }, [card]);
+  }, [card,answers, questions?.length, router ]);
 
   if (isLoading) {
     return <div className="text-white text-4xl"></div>;
