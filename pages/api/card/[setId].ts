@@ -12,7 +12,12 @@ export default async function handler(
   }
 
   try {
-    const { setId } = req.query;
+    const { setId } = req?.query;
+
+    
+    if (!setId || typeof setId !== "string") {
+      throw new Error("Invalid ID");
+    }
 
     const cards = await prisma.card.findMany({
       where: {
