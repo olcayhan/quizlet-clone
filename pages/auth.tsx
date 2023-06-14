@@ -43,12 +43,12 @@ const Auth = () => {
     <div className="flex h-screen items-center justify-center">
       <div className="flex flex-col w-96 h-96 bg-blue-950 px-3 py-4 items-center gap-5 justify-center rounded-lg">
         <h2 className="text-white font-semibold text-4xl">
-          {isLogin ? "Login" : "Register"}
+          {isLogin ? "Giriş Yap" : "Kayıt Ol"}
         </h2>
         {!isLogin && (
           <input
             type="text"
-            placeholder="Username"
+            placeholder="Kullanıcı Adı"
             className="text-white font-semibold p-2 w-3/4 outline-none border-gray-600 border-2 rounded-md focus:ring-4 bg-blue-950"
             onChange={(ev: any) => {
               setUsername(ev.target.value);
@@ -66,7 +66,7 @@ const Auth = () => {
         />
         <input
           type="password"
-          placeholder="Password"
+          placeholder="Şifre"
           className="text-white font-semibold p-2 w-3/4 outline-none rounded-md focus:ring-4 border-gray-600 border-2 bg-blue-950"
           onChange={(ev: any) => {
             setPassword(ev.target.value);
@@ -77,7 +77,7 @@ const Auth = () => {
           onClick={isLogin ? login : register}
         >
           <p className="text-white  font-bold">
-            {isLogin ? "Login" : "Register"}
+            {isLogin ? "Giriş Yap" : "Kayıt Ol"}
           </p>
         </button>
         <p
@@ -86,7 +86,7 @@ const Auth = () => {
             isLogin ? setLogin(false) : setLogin(true);
           }}
         >
-          {isLogin ? "Register here" : "Sign in Here"}
+          {isLogin ? "Buradan Kayıt Ol" : "Buradan Giriş Yap"}
         </p>
       </div>
     </div>
