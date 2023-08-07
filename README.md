@@ -1,38 +1,110 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+**Quizlet Clone - Readme**
 
-## Getting Started
+<img src='https://github.com/olcayhan/quizlet-clone/assets/71206063/b4915dac-850b-4deb-9d34-1c1750c62184' width='500px'/>
 
-First, run the development server:
+Quizlet Clone is a web application that resembles the original Quizlet platform, allowing users to create, share, and learn digital flashcards. This document outlines the necessary steps to run, deploy, and use the Quizlet Clone project.
+
+## Features
+
+- Users can create digital flashcards and categorize them into sets.
+- Login and registration features enable users to store and manage their personal card sets.
+- Users can view, search, and use card sets created by other users.
+- Users can create cards with questions on the front and answers on the back.
+- An automatic evaluation system helps users track their progress in learning the cards.
+
+## Installation
+
+To run Quizlet Clone on your local machine, follow these steps:
+
+1. Clone the repository to your computer or download it as a zip:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+git clone https://github.com/olcayhan/quizlet-clone.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+or download the zip file from [here](https://github.com/olcayhan/quizlet-clone/archive/main.zip) and extract it.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+2. Navigate to the project folder:
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+```bash
+cd quizlet-clone
+```
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+3. Install the required dependencies:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```bash
+npm install
+```
 
-## Learn More
+or
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+yarn install
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+4. Start the application:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+```bash
+npm start
+```
 
-## Deploy on Vercel
+or
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+yarn start
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+5. Open the following address in your browser:
+
+```
+http://localhost:3000
+```
+
+## Usage
+
+Quizlet Clone has a user-friendly interface and is easy to use. Follow these steps to use the application:
+
+1. On the homepage, click the "Log In" or "Sign Up" button to create an account or log in with an existing one.
+
+2. After logging in, view existing card sets in the "Card Sets" section or click the "Create New Card Set" button to create your own set.
+
+3. While creating the card set, enter the question and answer for each card.
+
+4. When you finish creating the card set, click the "Save" button to store the card set.
+
+5. On the homepage, you can search and use card sets created by other users. To open a card set, click on the set, and to see the cards, click the "View" button next to the set.
+
+6. Review the cards, with questions on the front and answers on the back, and start learning.
+
+## Contributing
+
+If you'd like to contribute to this project, follow these steps:
+
+1. Fork this repository.
+
+2. Create a new branch:
+
+```bash
+git checkout -b feature/your-feature-name
+```
+
+3. Make changes and commit:
+
+```bash
+git commit -m "Add a new feature"
+```
+
+4. Push to your forked repository:
+
+```bash
+git push origin feature/your-feature-name
+```
+
+5. Create a Pull Request (PR) and provide a brief explanation of your changes.
+
+6. We'll review your PR and merge your changes into the main project.
+
+
+## Contact
+
+If you have any questions or feedback, you can reach us at kolcayhan1@gmail.com.
